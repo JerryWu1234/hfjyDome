@@ -6,10 +6,12 @@ export const actions = {
       if (state.upcomBody.subjects && state.upcomBody.subjects.length) {
         res.subjects = state.upcomBody.subjects.concat(res.subjects)
       }
-      // res.start = state.upcomBody.start + 1;
-      // console.log(res,state.upcomBody)
       commit('UP_COMBODY', {upcomBody: res})
-      // commit('UP_COMING', {loading: false})
+    })
+  },
+  getMovieDetail ({commit, state},{id}) {
+    utils.get(`/movie/subject/${id}`, {}).then(res => {
+      commit('MOVING_DETAIL', {movieDetail: res})
     })
   },
 }

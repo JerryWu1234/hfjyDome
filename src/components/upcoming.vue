@@ -1,14 +1,15 @@
 <template>
   <div class="grid-950 clearfix">
     <aside class="right-side">
-      登录账户:{{login.user}}
+      <div class="right-side-left">登录账户:{{login.user}}</div>
+      <div @click="eixtLogin" class="right-side-right">退出登录</div>
     </aside>
     <article class="container">
       <div class="two-list">
         <ul class="clearfix">
           <upComingTag v-for="(item,index) in upcomBody.subjects" :item="item" :key="index"></upComingTag>
         </ul>
-        <div class="load-more">
+        <div class="load-more" v-if="upcomBody.subjects.length">
           <div type="text" @click="moredata()">加载更多</div>
         </div>
       </div>
@@ -25,8 +26,7 @@
     },
     computed: mapState({
       login: state => state.moving.login,
-      upcomBody: state => state.moving.upcomBody,
-
+      upcomBody: state => state.moving.upcomBody
     }),
     mounted () {
       this.$store.dispatch('getUpcoming')
@@ -35,11 +35,20 @@
       moredata () {
         this.$store.commit('ADD_PAGE')
         this.$store.dispatch('getUpcoming')
+      },
+      eixtLogin () {
+        this.$store.commit('EXIT_LOGIN')
+        this.$router.push(
+          {
+            name:'login',
+            params:{status: true}
+          }
+        )
       }
     },
     components: {
       'upComingTag': resolve => {
-        require(['./upComingTag.vue'], resolve)
+        require(['./chilren/upComingTag.vue'], resolve)
       }
     }
   }
@@ -49,9 +58,19 @@
 
 <style rel="stylesheet/less" lang="less">
   .right-side {
-    width: 310px;
+    width: 100%;
     height: 50px;
     line-height: 50px;
+    .right-side-left{
+      float: left;
+    }
+    .right-side-right{
+      float: right;
+      cursor: pointer;
+      &:hover{
+        color: #000;
+      }
+    }
   }
   .two-list {
     min-height: 500px;

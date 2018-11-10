@@ -83,7 +83,6 @@
 <style lang="less">
   h3 {
     margin-top: 100px;
-    text-align: center;
   }
   .box {
     background-color: #ffffff;
