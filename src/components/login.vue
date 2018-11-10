@@ -26,7 +26,7 @@
           pass: '密码长度不服asdfsdf'
         },
         status: false,
-        text: ''
+        text: '',
       }
     },
     computed: mapState({
