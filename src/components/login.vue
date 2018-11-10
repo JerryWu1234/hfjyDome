@@ -23,7 +23,7 @@
       return {
         checkinfo: {
           user: '手机输入错误',
-          pass: '密码长度不服'
+          pass: '密码长度不服asdfsdf'
         },
         status: false,
         text: ''
