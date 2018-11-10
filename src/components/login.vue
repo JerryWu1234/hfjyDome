@@ -23,10 +23,10 @@
       return {
         checkinfo: {
           user: '手机输入错误',
-          pass: '密码长度不服asdfsdf'
+          pass: '密码长度不服'
         },
         status: false,
-        text: '',
+        text: ''
       }
     },
     computed: mapState({
