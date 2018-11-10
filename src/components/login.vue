@@ -26,7 +26,7 @@
           pass: '密码长度不服'
         },
         status: false,
-        text: '',
+        text: ''
       }
     },
     computed: mapState({
