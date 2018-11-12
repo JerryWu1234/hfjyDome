@@ -1,5 +1,6 @@
 <template>
   <div class="container-moving" v-if="movieDetail.title">
+    <nav-top :login="login" @eixtLogin="eixtLogin"></nav-top>
     <div class="content">
       <h1>
         <span class="title">{{movieDetail.title}} {{movieDetail.original_title}}</span>
@@ -63,6 +64,7 @@
   </div>
 </template>
 <script>
+  import navTop from './navTop.vue'
   import { mapState } from 'vuex'
   export default{
     name: 'moviesDetail',
@@ -75,9 +77,24 @@
       this.id = this.$route.query.id
       this.$store.dispatch('getMovieDetail',{id:this.id})
     },
+    components:{
+      navTop
+    },
     computed: mapState({
-      movieDetail: state => state.moving.movieDetail,
+      login: state => state.moving.login,
+      movieDetail: state => state.moving.movieDetail
     }),
+    methods:{
+      eixtLogin () {
+        this.$store.commit('EXIT_LOGIN')
+        this.$router.push(
+          {
+            name:'login',
+            params:{status: true}
+          }
+        )
+      }
+    },
     beforeDestroy () {
       this.$store.commit('MOVING_DETAIL',{})
     }

@@ -1,9 +1,6 @@
 <template>
   <div class="grid-950 clearfix">
-    <aside class="right-side">
-      <div class="right-side-left">登录账户:{{login.user}}</div>
-      <div @click="eixtLogin" class="right-side-right">退出登录</div>
-    </aside>
+    <nav-top :login="login" @eixtLogin="eixtLogin"></nav-top>
     <article class="container">
       <div class="two-list">
         <ul class="clearfix">
@@ -18,6 +15,8 @@
 </template>
 
 <script>
+  import navTop from './navTop.vue'
+  import upComingTag from './chilren/upComingTag.vue'
   import { mapState } from 'vuex'
   export default {
     data () {
@@ -47,9 +46,8 @@
       }
     },
     components: {
-      'upComingTag': resolve => {
-        require(['./chilren/upComingTag.vue'], resolve)
-      }
+      upComingTag,
+      navTop
     }
   }
 </script>

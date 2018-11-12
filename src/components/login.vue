@@ -17,14 +17,12 @@
 <script>
   /* eslint-disable */
   import { mapState } from 'vuex'
+  import {checkMethod} from './chilren/commonJs.js'
   export default {
+    mixins:[checkMethod],
     name: "Login",
     data() {
       return {
-        checkinfo: {
-          user: '手机输入错误',
-          pass: '密码长度不服'
-        },
         status: false,
         text: ''
       }
@@ -34,47 +32,18 @@
     }),
     methods: {
       checkLogin () {
-        this.login
-        if(this.verification(this.login.user,this.login.pass)){
+        this.status = false
+        let data = {
+          user:this.login.user,
+          pass:this.login.pass,
+          status:this.status,
+          text:this.text
+        }
+        if(this.verification(data)){
           this.$router.push('/upcoming')
         }
-      },
-      verification (user,pass) {
-        this.status = false
-        if(!this.checkPhone(user)){
-          this.status = true
-          this.text = this.checkinfo.user
-          return
-        }
-        if(!this.checkPassword(pass)){
-          this.status = true
-          this.text = this.checkinfo.pass
-          return
-        }
-        if(this.checkPhone(user) && this.checkPassword(pass)){
-          this.status = false
-          return true
-        }
-
-      },
-      checkPhone(phone){
-        if((/^1(3|4|5|7|8|9|2)\d{9}$/.test(phone))){
-          return true
-        }else{
-          return false
-        }
-      },
-      checkPassword(phone){
-        if(phone.length > 5 && phone.length < 15 &&  phone!== ''){
-
-          return true
-        }else{
-          return false
-        }
-      },
-      topic () {
-
       }
+
     }
   };
 </script>
